@@ -12,7 +12,7 @@ function ProductCard(props) {
       </div>
       <div className="product__content">
         <h5>
-          <Link to={`foods/${id}`}>{title}</Link>
+          <Link to={`/foods/${id}`}>{title}</Link>
         </h5>
         <div
           style={{
@@ -22,7 +22,7 @@ function ProductCard(props) {
           }}
         >
           <span className="product__price">${price}</span>
-          <button className="addtoCart__btn">Add to Cart</button>
+          <button className="addToCart__btn">Add to Cart</button>
         </div>
       </div>
     </div>

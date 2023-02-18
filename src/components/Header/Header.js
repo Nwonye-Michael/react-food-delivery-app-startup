@@ -1,7 +1,8 @@
-import React, { useRef } from "react"
+import React, { useRef, useEffect, useState } from "react"
 import { Container, Nav } from "reactstrap"
 import logo from "../../assets/images/res-logo.png"
 import { NavLink, Link } from "react-router-dom"
+import Carts from "../UI/Cart/Carts"
 import "./Header.css"
 const nav__links = [
   {
@@ -21,18 +22,35 @@ const nav__links = [
     path: "/contact",
   },
 ]
-function Header() {
+
+function Header(props) {
   const menuRef = useRef(null)
+  const headRef = useRef(null)
   const toogleMenu = () => menuRef.current.classList.toggle("show__menu")
+
+  useEffect(() => {
+    window.addEventListener("scroll", () => {
+      if (
+        document.body.scrollTop > 80 ||
+        document.documentElement.scrollTop > 80
+      ) {
+        headRef.current.classList.add("header__shrink")
+      } else {
+        headRef.current.classList.remove("header__shrink")
+      }
+    })
+    return () => window.removeEventListener("scroll", null)
+  }, [])
+
   return (
-    <header className="header">
+    <header className="header" ref={headRef}>
       <Container>
-        <div className="nav_wrapper">
+        <div className="nav__wrapper">
           <div className="logo">
             <img src={logo} alt="logo" />
             <h5>Tasty Treat</h5>
           </div>
-
+          {/* menu */}
           <div className="navigation" ref={menuRef} onClick={toogleMenu}>
             <div className="menu">
               {nav__links.map((item, index) => (
@@ -50,10 +68,18 @@ function Header() {
           </div>
           {/* nav right icons */}
           <div className="nav__right ">
-            <span className="cart__icon">
+            {/* cart */}
+            <span
+              className="cart__icon"
+              onClick={() => {
+                props.setOpenCart(true)
+                console.log("clicked cart")
+              }}
+            >
               <i class="ri-shopping-basket-line"></i>
               <span className="cart__badge">2</span>
             </span>
+
             <span className="user">
               <Link to="/login">
                 <i class="ri-user-line"></i>

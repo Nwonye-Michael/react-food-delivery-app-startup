@@ -18,7 +18,7 @@ function Routers() {
         <Route path="/home" element={<Home />} />
         <Route path="/foods" element={<AllFoods />} />
         <Route path="/foods/:id" element={<FoodDetails />} />
-        <Route path="/cart" element={<Cart />} />
+        <Route path="/cart" element={<Home />} />
         <Route path="/checkout" element={<CheckOut />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />

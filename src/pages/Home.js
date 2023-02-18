@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useRef } from "react"
 
 import Helmet from "../components/Helmet/Helmet"
 import { Container, Row, Col, ListGroup, ListGroupItem } from "reactstrap"
@@ -49,11 +49,13 @@ function Home() {
   const [allProducts, setAllProducts] = useState(products)
 
   const [hotPizza, setHotPizza] = useState([])
+
   useEffect(() => {
     const filteredPizza = products.filter((item) => item.category === "Pizza")
     const slicedPizza = filteredPizza.slice(0, 4)
     setHotPizza(slicedPizza)
   }, [])
+
   useEffect(() => {
     if (category === "ALL") {
       setAllProducts(products)
@@ -159,7 +161,7 @@ function Home() {
                   style={{ width: "400px" }}
                   src={heroImg}
                   alt="hero"
-                  srcset=""
+                  srcSet=""
                 />
               </div>
             </Col>
@@ -414,7 +416,7 @@ function Home() {
             <Col lg="6" md="6">
               <div className="testimonial">
                 <h5
-                  classname="testimonial__subtitle"
+                  className="testimonial__subtitle"
                   style={{ marginBottom: "16px" }}
                 >
                   Testimonial
