@@ -29,7 +29,7 @@ function Category() {
     <Container>
       <Row>
         {categoryData.map((item, index) => (
-          <Col lg="3" md="4">
+          <Col lg="3" md="4" key={index}>
             <div
               className="category__items"
               style={{

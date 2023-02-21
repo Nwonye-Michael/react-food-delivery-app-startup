@@ -1,8 +1,11 @@
-import React, { useRef, useEffect, useState } from "react"
+import React, { useRef, useEffect, useState, useContext } from "react"
 import { Container, Nav } from "reactstrap"
 import logo from "../../assets/images/res-logo.png"
 import { NavLink, Link } from "react-router-dom"
 import Carts from "../UI/Cart/Carts"
+
+import { ProductContext } from "../Layout/Layout"
+
 import "./Header.css"
 const nav__links = [
   {
@@ -27,21 +30,27 @@ function Header(props) {
   const menuRef = useRef(null)
   const headRef = useRef(null)
   const toogleMenu = () => menuRef.current.classList.toggle("show__menu")
+  const { cartProducts } = useContext(ProductContext)
+
+  let totalQuantity = 0
+  cartProducts.map((item) => {
+    totalQuantity = totalQuantity + 1
+  })
 
   useEffect(() => {
     window.addEventListener("scroll", () => {
-      if (
-        document.body.scrollTop > 80 ||
-        document.documentElement.scrollTop > 80
-      ) {
-        headRef.current.classList.add("header__shrink")
-      } else {
-        headRef.current.classList.remove("header__shrink")
-      }
+      // if (
+      //   document.body.scrollTop > 80 ||
+      //   document.documentElement.scrollTop > 80
+      // ) {
+      //   headRef.current.classList.add("header__shrink")
+      // } else {
+      //   headRef.current.classList.remove("header__shrink")
+      // }
     })
     return () => window.removeEventListener("scroll", null)
   }, [])
-
+  useEffect(() => {}, [cartProducts])
   return (
     <header className="header" ref={headRef}>
       <Container>
@@ -77,7 +86,7 @@ function Header(props) {
               }}
             >
               <i class="ri-shopping-basket-line"></i>
-              <span className="cart__badge">2</span>
+              <span className="cart__badge">{totalQuantity}</span>
             </span>
 
             <span className="user">
